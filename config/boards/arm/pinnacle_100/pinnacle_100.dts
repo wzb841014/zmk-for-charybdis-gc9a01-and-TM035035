@@ -1,5 +1,5 @@
 /* config/boards/arm/pinnacle_100/pinnacle_100.dts */
-#include <app/boards/arm/nice_nano/nice_nano_v2.dts>
+#include <zmk/app/boards/arm/nice_nano/nice_nano_v2.dts>
 
 / {
     model = "Pinnacle 100 Keyboard";

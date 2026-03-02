@@ -9,15 +9,17 @@ manifest:
       url-base: https://github.com/wzb841014       # 驱动仓库
 
   projects:
-
-    # 2. GC9A01A 屏幕驱动
-    - name: gc9a01a_zephyr_driver
-      remote: gc9a01a_origin
-      revision: main
-    
     # 注意：通常不需要手动添加 zephyr 项目，因为 zmk 的 import: app/west.yml 
     # 会自动处理 zephyr 的下载。但如果你的自定义 zmk 分支里缺少这个 import 配置，
     # 你可能需要手动添加下面这段（通常不需要，先试上面的）：
     - name: zephyr
       remote: zephyrproject
       revision: v3.5.0  # 需要确认你的 zmk 分支兼容哪个 zephyr 版本
+
+      
+    # 2. GC9A01A 屏幕驱动
+    - name: gc9a01a_zephyr_driver
+      remote: gc9a01a_origin
+      revision: main
+    
+

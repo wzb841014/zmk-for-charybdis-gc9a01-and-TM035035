@@ -1,7 +1,6 @@
 manifest:
   self:
-    path: config  # <--- 关键修正：必须指向 config 目录，以匹配你的 boards/ 结构
-    path: config
+    path: .  # <--- 关键修正：必须指向 config 目录，以匹配你的 boards/ 结构
 
   remotes:
     - name: zephyrproject

@@ -6,7 +6,14 @@
 #include "charybdis.dtsi"
 /* config/boards/arm/pinnacle_100/pinnacle_100.dts */
 #include <nordic/nrf52840_qiaa.dtsi>
-
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWI_SCL, 0, 31)>,
+                    <NRF_PSEL(TWI_SDA, 0, 30)>;
+        };
+    };
+};
 
 
 /* 

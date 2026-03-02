@@ -27,7 +27,7 @@ manifest:
       # 1. 确保 DoctorWangWang/zmk 仓库的 feature-test 分支存在。
       # 2. 确保该分支根目录下有 app/west.yml 文件。
       # 如果 app/west.yml 不存在，尝试改为 import: true 或注释掉 import 行手动管理依赖。
-      import: config/west.yml 
+      import: app/west.yml 
 
       
     # 2. GC9A01A 屏幕驱动

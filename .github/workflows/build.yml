@@ -6,40 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout ZMK
-        uses: actions/checkout@v4
+      - name: Build
+        uses: zmkfirmware/zmk-action@main
         with:
-          repository: zmkfirmware/zmk
-          path: zmk
-          submodules: true
-      
-      - name: Checkout Config
-        uses: actions/checkout@v4
-        with:
-          path: config-temp
-      
-      - name: Setup
-        run: |
-          mkdir -p zmk/config
-          cp -r config-temp/* zmk/config/
-          rm -rf config-temp          
-      
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      
-      - name: Install west
-        run: pip install west
-      
-      - name: Init and build
-        run: |
-          cd zmk
-          west init -l config
-          west update
-          west build -b nrf52840dk_nrf52840 -s app          
-      
-      - name: Upload firmware
-        uses: actions/upload-artifact@v4
-        with:
-          name: firmware
-          path: zmk/build/zephyr/zmk.uf2
+          board: nrf52840dk_nrf52840

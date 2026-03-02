@@ -1,5 +1,5 @@
 /* config/boards/arm/pinnacle_100/pinnacle_100.dts */
-#include <zephyr/dts/arm/nordic/nrf52840.dtsi>
+#include <nordic/nrf52840_qiaa.dtsi>
 
 
 

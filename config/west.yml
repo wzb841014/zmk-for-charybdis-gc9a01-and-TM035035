@@ -1,6 +1,6 @@
 manifest:
   self:
-    path: config
+    path: . 
 
   remotes:
     - name: zmkfirmware

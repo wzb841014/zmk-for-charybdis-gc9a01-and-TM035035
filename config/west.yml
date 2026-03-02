@@ -3,19 +3,12 @@ manifest:
     path: config  # <--- 关键修正：必须指向 config 目录，以匹配你的 boards/ 结构
 
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/DoctorWangWang  # 你的自定义 ZMK 仓库
     - name: zephyrproject
       url-base: https://github.com/zephyrproject-rtos # <--- 新增：Zephyr 官方仓库
     - name: gc9a01a_origin
       url-base: https://github.com/wzb841014       # 驱动仓库
 
   projects:
-    # 1. 自定义 ZMK 核心
-    - name: zmk
-      remote: zmkfirmware
-      revision: feature-test
-      import: app/west.yml   # <--- 这将自动导入 zephyr, hal_nordic 等依赖
 
     # 2. GC9A01A 屏幕驱动
     - name: gc9a01a_zephyr_driver

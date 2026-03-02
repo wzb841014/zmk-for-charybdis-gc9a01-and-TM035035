@@ -1,19 +1,22 @@
-manifest:                                                                                                            
-  self:                                                                                                              
-    path: zmk                                                                                                        
-  remotes:                                                                                                           
-    - name: zmkfirmware                                                                                              
-      url-base: https://github.com/DoctorWangWang                                                                    
-  projects:                                                                                                          
-    - name: zmk                                                                                                      
-      remote: zmkfirmware                                                                                            
-      revision: feature-test                                                                                         
-      import: app/west.yml                                                                                           
-    - name: gc9a01a_zephyr_driver
-      url: https://github.com/wzb841014/gc9a01a_zephyr_driver
-      revision: main
+manifest:
+  self:
+    path: config  # <--- 关键：必须指向 config 目录，以匹配你的 boards/ 结构
+
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware  # <--- 已改为官方仓库
+    - name: gc9a01a_origin
+      url-base: https://github.com/wzb841014    # 驱动仓库保持不变
+
+  projects:
+    # 1. ZMK 官方核心项目
     - name: zmk
-      url: https://github.com/zmkfirmware/zmk
-      revision: main  # 或者具体的分支/标签
-      import: app-ws-bridge  # <--- 关键！这行会自动导入 zephyr 和其他依赖
+      remote: zmkfirmware
+      revision: main            # <--- 使用官方 main 分支
+      import: app-ws-bridge     # <--- 自动导入 zephyr, hal_nordic 等所有依赖
+
+    # 2. GC9A01A 屏幕驱动
+    - name: gc9a01a_zephyr_driver
+      remote: gc9a01a_origin
+      revision: main
 

@@ -7,14 +7,12 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <nordic/nrf52840_qiaa.dtsi>
 #include "charybdis.dtsi"
-&pinctrl {
-    i2c0_default: i2c0_default {
-        group1 {
-                sda-pin = <4>;    // P0.04
-                scl-pin = <5>;    // P0.05
-        };
-    };
+
+&i2c0 { status = "okay"; 
+        sda-pin = <4>;    // P0.04
+        scl-pin = <5>;    // P0.05
 };
+
 
 /* 
  * I2C 总线配置 (假设 IC27 触摸芯片连接在 I2C0)

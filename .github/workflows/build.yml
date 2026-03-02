@@ -12,19 +12,22 @@ jobs:
           path: zmk
           submodules: true
       
-      - uses: actions/checkout@v4
-        with:
-          path: zmk/config
-    
+      - name: Setup config
+        run: |
+          mkdir -p zmk/config
+          cp -r ${{ github.workspace }}/* zmk/config/ || true          
+      
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       
+      - run: pip install west
+      
       - run: |
-          pip install west
           cd zmk
+          west init -l config
           west update          
       
       - run: |
           cd zmk
-          west build -b nrf52840dk_nrf52840 -s app
+          west build -b nrf52840dk_nrf52840 -s app          

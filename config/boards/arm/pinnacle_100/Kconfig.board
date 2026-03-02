@@ -3,6 +3,16 @@
 
 config BOARD_PINNACLE_100
     bool "Pinnacle 100"
+    select BOARD_NRF52840
     help
       Nordic Semiconductor Pinnacle 100 development board
       featuring the nRF52840 ARM Cortex-M4F processor.
+
+# 👇 必须添加下面这部分 👇
+if BOARD_PINNACLE_100
+
+config BOARD
+    string
+    default "pinnacle_100"
+
+endif

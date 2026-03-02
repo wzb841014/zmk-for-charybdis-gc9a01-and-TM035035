@@ -10,7 +10,7 @@ manifest:
       url-base: https://github.com/DoctorWangWang
     - name: gc9a01a_origin
       url-base: https://github.com/wzb841014       # 驱动仓库
-      url-base: https://github.com/wzb841014
+
 
   projects:
     # 注意：通常不需要手动添加 zephyr 项目，因为 zmk 的 import: app/west.yml 

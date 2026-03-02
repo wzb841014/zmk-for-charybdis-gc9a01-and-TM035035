@@ -7,7 +7,7 @@ manifest:
     - name: zephyrproject
       url-base: https://github.com/zephyrproject-rtos # <--- 新增：Zephyr 官方仓库
     - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware/zmk
+      url-base: https://github.com/zmkfirmware
     - name: gc9a01a_origin
       url-base: https://github.com/wzb841014       # 驱动仓库
 

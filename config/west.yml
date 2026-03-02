@@ -22,7 +22,7 @@ manifest:
     # 核心：ZMK
     - name: zmk
       remote: zmkfirmware
-      revision: v2.0
+      revision: main
       # ⚠️ 关键检查点：
       # 1. 确保 DoctorWangWang/zmk 仓库的 feature-test 分支存在。
       # 2. 确保该分支根目录下有 app/west.yml 文件。

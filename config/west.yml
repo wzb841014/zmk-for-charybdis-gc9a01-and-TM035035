@@ -20,4 +20,4 @@ manifest:
   projects:                                                                                                          
     - name: zephyr                                                                                                      
       remote: zephyrproject-rtos                                                                                            
-      revision: main
+      revision: v3.0.0+zmk-fixes

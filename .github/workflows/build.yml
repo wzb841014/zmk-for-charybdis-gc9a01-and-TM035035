@@ -1,5 +1,26 @@
-on: [push, pull_request, workflow_dispatch]
+name: Build
+
+on:
+  push:
+    branches: [main]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/zmkfirmware/zmk-build-arm:4.1
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Init
+        run: |
+          west init -l .
+          west update          
+
+      - name: Build
+        run: west build -b nrf52840dk_nrf52840 -s app
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: build/zephyr/zmk.uf2

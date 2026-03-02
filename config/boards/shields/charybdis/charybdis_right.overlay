@@ -40,36 +40,11 @@
  */
 &spi0 {
     status = "okay";
-
-    
-    /* 示例：GC9A01A 屏幕节点 (如果也在这个板子上定义) */
-    /* 
-    gc9a01a_display: gc9a01a@0 {
-        compatible = "gc9a01a-display";
-        reg = <0>;
-        status = "disabled";
-        reset-gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
-        dc-gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
-        spi-max-frequency = <8000000>;
-    };
-    */
 };
 
-/* 
- * GPIO 按键矩阵 (KSCAN) 配置示例
- * 分体键盘通常需要配置 matrix 扫描
- */
-/*
-&kscan {
-    status = "okay";
-    // ... 矩阵配置 ...
-};
-*/
 
-/* 
- * 电池电压检测 (ADC) 配置示例
- */
-/*
+
+
 &adc {
     status = "okay";
     // ... ADC 通道配置 ...
@@ -92,15 +67,7 @@
 		;
 };
 
-/*
- * GC9A01A SPI Display on nice!nano (SPI1)
- * Wiring:
- * - SCK:  P0.19
- * - MOSI: P0.20
- * - MISO: P0.22
- * - DC:   P0.16
- * - RST:  P0.21
- */
+
 
 
 &ic27_touch {

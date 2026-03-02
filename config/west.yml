@@ -1,38 +1,26 @@
 manifest:
   self:
-    path: config  # 必须指向 config 目录
+    path: config
 
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: zephyrproject
-      url-base: https://github.com/zephyrproject-rtos
     - name: gc9a01a_origin
       url-base: https://github.com/wzb841014
 
   projects:
-    # 1. ZMK 核心 (你的自定义分支)
+    # ZMK 核心
     - name: zmk
       remote: zmkfirmware
-      revision: main  # <--- 建议先切回 main 测试，确保 import 有效。如果是 feature-test，请确保该分支有 app/west.yml
-      # 如果你手动定义了 zephyr，这里的 import 即使失败也不会阻止 zephyr 下载，但最好还是修好它
-      import: app/west.yml 
+      revision: main
+      import: app/west.yml
 
-    # 2. 【新增】显式强制拉取 Zephyr
-    # 这是解决你 "nrf52840.dtsi not found" 的关键
+    # Zephyr (必须用 v4.1.0+zmk-fixes)
     - name: zephyr
-      remote: zmkfirmware  # <--- 注意：ZMK 通常使用 zmkfirmware/zephyr 而不是官方的 zephyrproject-rtos/zephyr
-                           # 因为 zmkfirmware 的版本经过测试，与 ZMK 完全兼容
-      revision: v0.3 # <--- 关键：必须指定与 ZMK 兼容的版本。
-                              # 如果不确定，可以尝试 'main' 或查看 zmk 的 app/west.yml 里引用的版本
-      
-    # 3. 【可选但推荐】显式拉取 Nordic HAL
-    # 很多时候缺了 hal_nordic 也会报奇怪的编译错
-    - name: hal_nordic
-      remote: zephyrproject
-      revision: v0.3 # 版本需与 zephyr 一致
+      remote: zmkfirmware
+      revision: v4.1.0+zmk-fixes
 
-    # 4. GC9A01A 驱动
+    # GC9A01A 驱动
     - name: gc9a01a_zephyr_driver
       remote: gc9a01a_origin
       revision: main

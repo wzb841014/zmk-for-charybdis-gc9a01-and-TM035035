@@ -1,21 +1,19 @@
 manifest:
   self:
-    path: config  # <--- 关键：必须指向 config 目录，以匹配你的 boards/ 结构
+    path: config
 
   remotes:
     - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware  # <--- 已改为官方仓库
+      url-base: https://github.com/zmkfirmware
     - name: gc9a01a_origin
-      url-base: https://github.com/wzb841014    # 驱动仓库保持不变
+      url-base: https://github.com/wzb841014
 
   projects:
-    # 1. ZMK 官方核心项目
     - name: zmk
       remote: zmkfirmware
-      revision: main            # <--- 使用官方 main 分支
-      import: app-ws-bridge     # <--- 自动导入 zephyr, hal_nordic 等所有依赖
+      revision: main
+      import: app/west.yml   # <--- 修改这里！从 app-ws-bridge 改为 app/west.yml
 
-    # 2. GC9A01A 屏幕驱动
     - name: gc9a01a_zephyr_driver
       remote: gc9a01a_origin
       revision: main

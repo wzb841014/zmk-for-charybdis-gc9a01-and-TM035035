@@ -14,7 +14,7 @@ manifest:
     # 1. ZMK 核心 (你的自定义分支)
     - name: zmk
       remote: zmkfirmware
-      revision: main  # <--- 建议先切回 main 测试，确保 import 有效。如果是 feature-test，请确保该分支有 app/west.yml
+      revision: v0.3.0  # <--- 建议先切回 main 测试，确保 import 有效。如果是 feature-test，请确保该分支有 app/west.yml
       # 如果你手动定义了 zephyr，这里的 import 即使失败也不会阻止 zephyr 下载，但最好还是修好它
       import: app/west.yml 
 

@@ -1,45 +1,30 @@
-name: Build ZMK
+name: Build
 
-on:
-  push:
-    branches: [main]
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout ZMK
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           repository: zmkfirmware/zmk
           path: zmk
           submodules: true
-          fetch-depth: 0
       
-      - name: Checkout Config
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           path: zmk/config
-      
-      - name: Set up Python
-        uses: actions/setup-python@v5
+    
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       
-      - name: Install dependencies
-        run: |
+      - run: |
           pip install west
           cd zmk
-          west init -l config
-          west update -f clone          
+          west update          
       
-      - name: Build
-        run: |
+      - run: |
           cd zmk
-          west build -b nrf52840dk_nrf52840 -s app          
-
-      - name: Upload firmware
-        uses: actions/upload-artifact@v4
-        with:
-          name: zmk-firmware
-          path: zmk/build/zephyr/zmk.uf2
+          west build -b nrf52840dk_nrf52840 -s app

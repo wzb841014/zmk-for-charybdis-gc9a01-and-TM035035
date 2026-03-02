@@ -40,7 +40,7 @@
  */
 &spi0 {
     status = "okay";
-    spi-max-frequency = <8000000>; /* 8MHz */
+
     
     /* 示例：GC9A01A 屏幕节点 (如果也在这个板子上定义) */
     /* 

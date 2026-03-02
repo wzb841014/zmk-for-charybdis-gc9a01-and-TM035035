@@ -11,4 +11,9 @@ manifest:
       import: app/west.yml                                                                                           
     - name: gc9a01a_zephyr_driver
       url: https://github.com/wzb841014/gc9a01a_zephyr_driver
-      revision: main           
+      revision: main
+    - name: zmk
+      url: https://github.com/zmkfirmware/zmk
+      revision: main  # 或者具体的分支/标签
+      import: app-ws-bridge  # <--- 关键！这行会自动导入 zephyr 和其他依赖
+

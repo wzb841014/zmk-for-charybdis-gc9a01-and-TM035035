@@ -1,19 +1,14 @@
-manifest:
-  self:
-    path: config
-
-  remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-    - name: gc9a01a_origin
-      url-base: https://github.com/wzb841014
-
-  projects:
-    - name: zmk
-      remote: zmkfirmware
-      revision: main
-      import: app/west.yml   # <--- 修改这里！从 app-ws-bridge 改为 app/west.yml
-
+manifest:                                                                                                            
+  self:                                                                                                              
+    path: zmk                                                                                                        
+  remotes:                                                                                                           
+    - name: zmkfirmware                                                                                              
+      url-base: https://github.com/DoctorWangWang                                                                    
+  projects:                                                                                                          
+    - name: zmk                                                                                                      
+      remote: zmkfirmware                                                                                            
+      revision: feature-test                                                                                         
+      import: app/west.yml                                                                                           
     - name: gc9a01a_zephyr_driver
-      remote: gc9a01a_origin
-      revision: main
+      url: https://github.com/wzb841014/gc9a01a_zephyr_driver
+      revision: main           

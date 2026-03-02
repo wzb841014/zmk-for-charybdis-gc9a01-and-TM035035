@@ -4,7 +4,7 @@ manifest:
       url: https://github.com/wzb841014/gc9a01a_zephyr_driver
       revision: main
   self:                                                                                                              
-    path: zmk                                                                                                        
+    path: .                                                                                                        
   remotes:
     - name: zmkfirmware                                                                                              
       url-base: https://github.com/DoctorWangWang                                                                    

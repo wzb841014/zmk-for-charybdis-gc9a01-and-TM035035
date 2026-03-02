@@ -1,14 +1,41 @@
-manifest:                                                                                                            
-  self:                                                                                                              
-    path: zmk                                                                                                        
-  remotes:                                                                                                           
-    - name: zmkfirmware                                                                                              
-      url-base: https://github.com/DoctorWangWang                                                                    
-  projects:                                                                                                          
-    - name: zmk                                                                                                      
-      remote: zmkfirmware                                                                                            
-      revision: feature-test                                                                                         
-      import: app/west.yml                                                                                           
-    - name: gc9a01a_zephyr_driver
-      url: https://github.com/wzb841014/gc9a01a_zephyr_driver
-      revision: main           
+ 
+
+
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+  projects:
+    - name: zephyr
+      remote: zmkfirmware
+      revision: v3.0.0+zmk-fixes
+      clone-depth: 1
+      import:
+        # TODO: Rename once upstream offers option like `exclude` or `denylist`
+        name-blacklist:
+          - ci-tools
+          - hal_altera
+          - hal_cypress
+          - hal_infineon
+          - hal_microchip
+          - hal_nxp
+          - hal_openisa
+          - hal_silabs
+          - hal_xtensa
+          - hal_st
+          - hal_ti
+          - loramac-node
+          - mcuboot
+          - mcumgr
+          - net-tools
+          - openthread
+          - edtt
+          - trusted-firmware-m
+          - sof
+     - name: gc9a01a_zephyr_driver
+       url: https://github.com/wzb841014/gc9a01a_zephyr_driver
+       revision: main  
+  self:
+    west-commands: scripts/west-commands.yml

@@ -15,7 +15,7 @@ jobs:
       - name: Init
         run: |
           west init -l config
-          west update -f clone          
+   
 
       - name: Build
         run: west build -b nrf52840dk_nrf52840 -s app

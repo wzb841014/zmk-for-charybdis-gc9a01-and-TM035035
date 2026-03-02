@@ -18,11 +18,11 @@ manifest:
     # 你可能需要手动添加下面这段（通常不需要，先试上面的）：
     - name: zephyr
       remote: zephyrproject
-      revision: v0.3.0  # 需要确认你的 zmk 分支兼容哪个 zephyr 版本
+      revision: v3.0.0+zmk-fixes  # 需要确认你的 zmk 分支兼容哪个 zephyr 版本
     # 核心：ZMK
     - name: zmk
       remote: zmkfirmware
-      revision: v3.0.0+zmk-fixes
+      revision: main
       # ⚠️ 关键检查点：
       # 1. 确保 DoctorWangWang/zmk 仓库的 feature-test 分支存在。
       # 2. 确保该分支根目录下有 app/west.yml 文件。

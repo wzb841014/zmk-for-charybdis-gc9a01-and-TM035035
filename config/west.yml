@@ -1,14 +1,21 @@
-manifest:                                                                                                            
-  self:                                                                                                              
-    path: zmk                                                                                                        
-  remotes:                                                                                                           
-    - name: zmkfirmware                                                                                              
-      url-base: https://github.com/DoctorWangWang                                                                    
-  projects:                                                                                                          
-    - name: zmk                                                                                                      
-      remote: zmkfirmware                                                                                            
-      revision: feature-test                                                                                         
-      import: app/west.yml                                                                                           
+manifest:
+  self:
+    path: config
+
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+    - name: gc9a01a_origin
+      url-base: https://github.com/wzb841014
+
+  projects:
+    # 核心项目：ZMK (它会自动拉取 Zephyr)
+    - name: zmk
+      remote: zmkfirmware
+      revision: main
+      import: app/west.yml   # <--- 关键！这行代码告诉 west 去下载 zephyr 源码
+
+    # 你的自定义驱动
     - name: gc9a01a_zephyr_driver
-      url: https://github.com/wzb841014/gc9a01a_zephyr_driver
-      revision: main           
+      remote: gc9a01a_origin
+      revision: main

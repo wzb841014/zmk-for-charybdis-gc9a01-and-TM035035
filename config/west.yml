@@ -1,25 +1,16 @@
-manifest: 
-  projects:    
+manifest:
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/DoctorWangWang
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+  projects:
+    - name: zmk
+      remote: zmkfirmware
+      revision: feature-test
+      import: app/west.yml
     - name: gc9a01a_zephyr_driver
       url: https://github.com/wzb841014/gc9a01a_zephyr_driver
       revision: main
-  self:                                                                                                              
-    path: zmk                                                                                                        
-  remotes:
-    - name: zmkfirmware                                                                                              
-      url-base: https://github.com/DoctorWangWang                                                                
-  projects:                                                                                                          
-    - name: zmk                                                                                                      
-      remote: zmkfirmware                                                                                            
-      revision: feature-test                                                                                         
-      import: app/west.yml
-
-  self:                                                                                                              
-    path: zephyr   
-  remotes:
-    - name: zephyrproject-rtos
-      url-base: https://github.com/zephyrproject-rtos
-  projects:                                                                                                          
-    - name: zephyr                                                                                                      
-      remote: zephyrproject-rtos                                                                                            
-      revision: v4.1.0
+  self:
+    path: .

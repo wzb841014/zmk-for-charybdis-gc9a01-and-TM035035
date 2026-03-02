@@ -18,7 +18,7 @@ manifest:
     # 你可能需要手动添加下面这段（通常不需要，先试上面的）：
     - name: zephyr
       remote: zephyrproject
-      revision: v4.1.0+zmk-fixes  # 需要确认你的 zmk 分支兼容哪个 zephyr 版本
+      revision: v4.1.0  # 需要确认你的 zmk 分支兼容哪个 zephyr 版本
     # 核心：ZMK
     - name: zmk
       remote: zmkfirmware

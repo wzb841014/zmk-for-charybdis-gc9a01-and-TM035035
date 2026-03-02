@@ -4,3 +4,5 @@ if BOARD_PINNACLE_100
     config BOARD_REV_1_0 # 如果有版本定义
         def_bool y
 endif
+
+config SOC_NRF52840 def_bool y

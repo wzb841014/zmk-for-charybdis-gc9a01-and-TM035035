@@ -7,7 +7,7 @@ manifest:
     path: .                                                                                                        
   remotes:
     - name: zmkfirmware                                                                                              
-      url-base: https://github.com/DoctorWangWang                                                                    
+      url-base: https://github.com/DoctorWangWang/zmk                                                                    
   projects:                                                                                                          
     - name: zmk                                                                                                      
       remote: zmkfirmware                                                                                            

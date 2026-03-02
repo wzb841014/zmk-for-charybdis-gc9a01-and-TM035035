@@ -4,7 +4,7 @@
  * Based on nRF52840 DK / Nice!Nano architecture
  */
 
-#include <app/dts/common/nordic/nrf52840_uf2_boot_mode.dtsi>
+#include <app/boards/arm/nrf52840_m2/nrf52840_m2.dts>
 
 / {
     model = "Pinnacle 100 Keyboard";

@@ -1,20 +1,7 @@
 /* config/boards/arm/pinnacle_100/pinnacle_100.dts */
 #include <zmk/app/boards/arm/nice_nano/nice_nano_v2.dts>
 
-/ {
-    model = "Pinnacle 100 Keyboard";
-    compatible = "pinnacle_100", "nordic,nrf52840";
 
-    /* 选择内部高速振荡器 (HFXO) 如果外部有晶振，否则使用内部 RC */
-    &clock {
-        status = "okay";
-    };
-
-    /* 电源管理 */
-    &power {
-        status = "okay";
-    };
-};
 
 /* 
  * I2C 总线配置 (假设 IC27 触摸芯片连接在 I2C0)

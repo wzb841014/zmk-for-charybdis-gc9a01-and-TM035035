@@ -70,7 +70,9 @@
 };
 */
 
-
+&adc {
+    status = "disabled";
+};
 
 
 

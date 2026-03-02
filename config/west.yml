@@ -1,26 +1,38 @@
 manifest:
   self:
-    path: . 
+    path: config  # <--- 关键修正：必须指向 config 目录，以匹配你的 boards/ 结构
+    path: config
 
   remotes:
+    - name: zephyrproject
+      url-base: https://github.com/zephyrproject-rtos # <--- 新增：Zephyr 官方仓库
     - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
+      url-base: https://github.com/DoctorWangWang
     - name: gc9a01a_origin
+      url-base: https://github.com/wzb841014       # 驱动仓库
       url-base: https://github.com/wzb841014
 
   projects:
-    # ZMK 核心
+    # 注意：通常不需要手动添加 zephyr 项目，因为 zmk 的 import: app/west.yml 
+    # 会自动处理 zephyr 的下载。但如果你的自定义 zmk 分支里缺少这个 import 配置，
+    # 你可能需要手动添加下面这段（通常不需要，先试上面的）：
+    - name: zephyr
+      remote: zephyrproject
+      revision: v3.5.0  # 需要确认你的 zmk 分支兼容哪个 zephyr 版本
+    # 核心：ZMK
     - name: zmk
       remote: zmkfirmware
-      revision: main
-      import: app/west.yml
+      revision: feature-test
+      # ⚠️ 关键检查点：
+      # 1. 确保 DoctorWangWang/zmk 仓库的 feature-test 分支存在。
+      # 2. 确保该分支根目录下有 app/west.yml 文件。
+      # 如果 app/west.yml 不存在，尝试改为 import: true 或注释掉 import 行手动管理依赖。
+      import: app/west.yml 
 
-    # Zephyr (必须用 v4.1.0+zmk-fixes)
-    - name: zephyr
-      remote: zmkfirmware
-      revision: v4.1.0+zmk-fixes
-
-    # GC9A01A 驱动
+      
+    # 2. GC9A01A 屏幕驱动
+    # 驱动
     - name: gc9a01a_zephyr_driver
       remote: gc9a01a_origin
       revision: main
+  

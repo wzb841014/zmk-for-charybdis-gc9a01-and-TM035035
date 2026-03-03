@@ -26,6 +26,7 @@
     glidepoint: glidepoint@0 {
         compatible = "cirque,pinnacle";
         reg = <0>;
+        label = "glidepoint";
         spi-max-frequency = <1000000>;
         status = "okay";
         

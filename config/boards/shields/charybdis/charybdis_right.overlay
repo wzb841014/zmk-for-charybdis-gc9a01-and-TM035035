@@ -30,7 +30,6 @@
     status = "okay";
     clock-frequency = <400000>; /* 400kHz */
     compatible = "zmk,cap-sensor";
-    status = "okay";
     sck-pin = <4>;      // SPI 时钟
     mosi-pin = <5>;     // SPI 数据输出
     miso-pin = <5>;     // SPI 数据输入 (如果需要)       

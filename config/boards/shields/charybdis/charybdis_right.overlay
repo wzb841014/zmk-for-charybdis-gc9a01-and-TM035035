@@ -26,7 +26,7 @@
  * 请根据实际原理图修改 SDA/SCL 引脚
  */
 
-&sp1 {
+&sp0 {
     status = "okay";
     clock-frequency = <400000>; /* 400kHz */
     compatible = "zmk,cap-sensor";

@@ -6,7 +6,7 @@
 #include "charybdis_right.dtsi"
 / {
     chosen {
-        zmk,cap-sensor = &gc9a01;
+        zmk,cap-sensor = &ic27_touch;
     };
 };     
 

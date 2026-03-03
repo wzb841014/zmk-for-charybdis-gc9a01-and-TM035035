@@ -53,6 +53,9 @@
     status = "okay";
 };
 
+&gpio1 {
+    status = "okay";
+};
 
 
 

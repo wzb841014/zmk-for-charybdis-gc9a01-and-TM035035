@@ -61,18 +61,5 @@
  */
 
 
-/* 
- * GPIO 按键矩阵 (KSCAN) 配置示例
- * 分体键盘通常需要配置 matrix 扫描
- */
-/*
-&kscan {
-    status = "okay";
-    // ... 矩阵配置 ...
-};
-*/
 
-&adc {
-    status = "okay";
-};
 

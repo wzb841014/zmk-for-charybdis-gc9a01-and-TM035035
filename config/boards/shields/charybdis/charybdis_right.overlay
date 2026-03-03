@@ -19,7 +19,6 @@
 
 
 &i2c1 { status = "okay"; 
-        status = "okay";
         scl-pin = <5>;      // I2C 时钟
         sda-pin = <4>;      // I2C 数据
 };

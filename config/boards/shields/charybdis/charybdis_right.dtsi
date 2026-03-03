@@ -60,6 +60,18 @@
  * 假设屏幕连接在 SPI0
  */
 
+&kscan {
+    status = "okay";
+    // ... 矩阵配置 ...
+};
+
+
+
+&adc {
+    status = "okay";
+    // ... ADC 通道配置 ...
+};
+
 
 
 

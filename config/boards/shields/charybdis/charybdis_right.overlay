@@ -18,10 +18,10 @@
 };
 
 
-&spi1 { status = "okay"; 
-        scl-pin = <4>;    // P0.04
-        mosi-pin = <5>;    // P0.05
-        miso-pin = <5>;
+&i2c1 { status = "okay"; 
+        status = "okay";
+        scl-pin = <5>;      // I2C 时钟
+        sda-pin = <4>;      // I2C 数据
 };
 
 
@@ -30,7 +30,7 @@
  * 请根据实际原理图修改 SDA/SCL 引脚
  */
 
-&spi1 {
+&i2c1 {
     status = "okay";
     clock-frequency = <400000>; /* 400kHz */
     
@@ -93,7 +93,7 @@
 &ic27_touch {
     status = "okay";
     sda-pin = <4>;    // P0.04
-    sck-pin = <5>;    // P0.05
+    scl-pin = <5>;    // P0.05
 };
 
 // trackball bus

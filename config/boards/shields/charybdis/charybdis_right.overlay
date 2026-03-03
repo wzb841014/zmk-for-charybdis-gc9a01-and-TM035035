@@ -6,7 +6,7 @@
 #include "charybdis_right.dtsi"
 / {
     chosen {
-        zmk,cap-sensor = &ic27_touch;
+        zmk,cap-sensor = &glidepoint;
     };
 };     
 

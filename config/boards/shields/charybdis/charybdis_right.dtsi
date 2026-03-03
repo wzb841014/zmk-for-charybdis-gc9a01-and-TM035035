@@ -1,1 +1,78 @@
+/*
+ * Copyright (c) 2020 ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+#include <dt-bindings/i2c/i2c.h>
+#include <dt-bindings/gpio/gpio.h>
+#include <nordic/nrf52840_qiaa.dtsi>
+#include "charybdis.dtsi"
+
+
+/ {
+	kscan0: kscan {
+		compatible = "zmk,kscan-gpio-matrix";
+		label = "KSCAN";
+		row-gpios = <&pro_micro 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+	};
+};
+
+
+
+
+
+/* 
+ * I2C 总线配置 (假设 IC27 触摸芯片连接在 I2C0)
+ * 请根据实际原理图修改 SDA/SCL 引脚
+ */
+
+&spi1 {
+    status = "okay";
+    clock-frequency = <400000>; /* 400kHz */
+    compatible = "zmk,cap-sensor";
+    sck-pin = <4>;      // SPI 时钟
+    mosi-pin = <5>;     // SPI 数据输出
+    miso-pin = <5>;     // SPI 数据输入 (如果需要)       
+    /* 
+     * IC27 电容触摸传感器节点 
+     * 标签名: ic27_touch (这就是你在 overlay 中要引用的名字)
+     */
+    ic27_touch: touch@27 {
+        compatible = "zmk,cap-sensor"; /* 注意：请替换为实际的驱动兼容字符串，例如 "onsemi,ncs2200" 或 "zmk,cap-sensor" */
+        status = "okay";           /* 默认禁用，由 Shield Overlay 启用 */
+        reg = <0>;
+        /* 中断引脚配置 (请根据原理图修改 GPIO 端口和引脚号) */
+        irq-gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;  /* 中断引脚 */
+        
+        /* 其他可能的属性，取决于具体驱动 */
+        // zmk,read-delay-ms = <5>;
+    };
+};
+
+&ic27_touch {
+    status = "okay";
+    sck-pin = <4>;      // SPI 时钟
+    mosi-pin = <5>;     // SPI 数据输出
+    miso-pin = <5>;     // SPI 数据输入 (如果需要)       
+};
+/* 
+ * SPI 总线配置 (如果你还有 GC9A01A 屏幕，通常也在 SPI 上)
+ * 假设屏幕连接在 SPI0
+ */
+
+
+/* 
+ * GPIO 按键矩阵 (KSCAN) 配置示例
+ * 分体键盘通常需要配置 matrix 扫描
+ */
+/*
+&kscan {
+    status = "okay";
+    // ... 矩阵配置 ...
+};
+*/
+
+&adc {
+    status = "okay";
+};
 

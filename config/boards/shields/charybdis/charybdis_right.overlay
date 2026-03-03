@@ -93,7 +93,7 @@
 &ic27_touch {
     status = "okay";
     sda-pin = <4>;    // P0.04
-    scl-pin = <5>;    // P0.05
+    sck-pin = <5>;    // P0.05
 };
 
 // trackball bus

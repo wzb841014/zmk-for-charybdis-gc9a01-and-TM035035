@@ -8,7 +8,7 @@
 #include <nordic/nrf52840_qiaa.dtsi>
 #include "charybdis.dtsi"
 
-&spi0 { status = "okay"; 
+&spi1 { status = "okay"; 
         scl-pin = <4>;    // P0.04
         mosi-pin = <5>;    // P0.05
         miso-pin = <5>;
@@ -20,7 +20,7 @@
  * 请根据实际原理图修改 SDA/SCL 引脚
  */
 
-&spi0 {
+&spi1 {
     status = "okay";
     clock-frequency = <400000>; /* 400kHz */
     

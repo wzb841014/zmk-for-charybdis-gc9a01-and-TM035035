@@ -9,8 +9,9 @@
 #include "charybdis.dtsi"
 
 &spi0 { status = "okay"; 
-        sda-pin = <4>;    // P0.04
-        scl-pin = <5>;    // P0.05
+        scl-pin = <4>;    // P0.04
+        mosi-pin = <5>;    // P0.05
+        miso-pin = <5>;
 };
 
 

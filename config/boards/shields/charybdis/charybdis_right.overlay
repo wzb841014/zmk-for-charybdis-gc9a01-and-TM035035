@@ -6,7 +6,7 @@
 #include "charybdis_right.dtsi"
 / {
     chosen {
-        zephyr,display = &gc9a01;
+        zmk,cap-sensor = &gc9a01;
     };
 };     
 

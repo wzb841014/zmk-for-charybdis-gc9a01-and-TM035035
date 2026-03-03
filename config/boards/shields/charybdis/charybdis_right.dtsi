@@ -60,7 +60,7 @@
  * 假设屏幕连接在 SPI0
  */
 
-&kscan {
+&kscan0 {
     status = "okay";
     // ... 矩阵配置 ...
 };

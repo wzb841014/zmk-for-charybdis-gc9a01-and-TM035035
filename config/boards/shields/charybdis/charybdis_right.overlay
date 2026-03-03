@@ -43,21 +43,7 @@
  * SPI 总线配置 (如果你还有 GC9A01A 屏幕，通常也在 SPI 上)
  * 假设屏幕连接在 SPI0
  */
-&spi0 {
-    status = "okay";
-    
-    /* 示例：GC9A01A 屏幕节点 (如果也在这个板子上定义) */
-    /* 
-    gc9a01a_display: gc9a01a@0 {
-        compatible = "gc9a01a-display";
-        reg = <0>;
-        status = "disabled";
-        reset-gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
-        dc-gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
-        spi-max-frequency = <8000000>;
-    };
-    */
-};
+
 
 /* 
  * GPIO 按键矩阵 (KSCAN) 配置示例

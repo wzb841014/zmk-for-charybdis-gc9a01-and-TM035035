@@ -17,35 +17,35 @@
 	};
 };
 
-/* SPI 配置 */
+
 &pro_micro_spi {
     status = "okay";
     cs-gpios = <&gpio0 19 GPIO_ACTIVE_LOW>;
     
-    /* GlidePoint 触控板 */
+
     glidepoint: glidepoint@0 {
         compatible = "cirque,pinnacle";
         reg = <0>;
         spi-max-frequency = <1000000>;
         status = "okay";
         
-        /* Data Ready 中断引脚 */
+
         dr-gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>;
         
-        /* 可选配置 */
+
         sensitivity = "4x";
         sleep;
         no-taps;
     };
 };
-/* 输入监听器 - 必须添加 */
-& {
+
+&glidepoint {
     glidepoint_listener {
         compatible = "zmk,input-listener";
         device = <&glidepoint>;
     };
 };
-/* 启用 GPIO */
+
 &gpio0 {
     status = "okay";
 };
@@ -53,24 +53,21 @@
 
 &glidepoint {
     status = "okay";
-    /* 旧式引脚配置 (必需) */
+
     sck-pin = <4>;    /* P0.17 */
     mosi-pin = <5>;   /* P0.15 */
     miso-pin = <5>;   /* P0.13 */ 
 };
-/* 
- * SPI 总线配置 (如果你还有 GC9A01A 屏幕，通常也在 SPI 上)
- * 假设屏幕连接在 SPI0
- */
+
 
 &kscan0 {
     status = "okay";
-    // ... 矩阵配置 ...
+
 };
 
 &adc {
     status = "okay";
-    // ... ADC 通道配置 ...
+
 };
 
 

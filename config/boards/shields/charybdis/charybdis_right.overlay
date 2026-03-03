@@ -41,7 +41,7 @@
     ic27_touch: touch@27 {
         compatible = "zmk,cap-sensor"; /* 注意：请替换为实际的驱动兼容字符串，例如 "onsemi,ncs2200" 或 "zmk,cap-sensor" */
         reg = <0x27>;                  /* I2C 地址 0x27 */
-        status = "disabled";           /* 默认禁用，由 Shield Overlay 启用 */
+        status = "okay";           /* 默认禁用，由 Shield Overlay 启用 */
         
         /* 中断引脚配置 (请根据原理图修改 GPIO 端口和引脚号) */
         interrupt-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;

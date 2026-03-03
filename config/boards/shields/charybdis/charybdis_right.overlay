@@ -42,7 +42,7 @@
         status = "okay";           /* 默认禁用，由 Shield Overlay 启用 */
         reg = <0>;
         /* 中断引脚配置 (请根据原理图修改 GPIO 端口和引脚号) */
-        interrupt-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        irq-gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;  /* 中断引脚 */
         
         /* 其他可能的属性，取决于具体驱动 */
         // zmk,read-delay-ms = <5>;

@@ -18,10 +18,7 @@
 };
 
 
-&i2c1 { status = "okay"; 
-        scl-pin = <5>;      // I2C 时钟
-        sda-pin = <4>;      // I2C 数据
-};
+
 
 
 /* 
@@ -29,16 +26,20 @@
  * 请根据实际原理图修改 SDA/SCL 引脚
  */
 
-&i2c1 {
+&sp1 {
     status = "okay";
     clock-frequency = <400000>; /* 400kHz */
-    
+    compatible = "zmk,cap-sensor";
+    status = "okay";
+    sck-pin = <4>;      // SPI 时钟
+    mosi-pin = <5>;     // SPI 数据输出
+    miso-pin = <5>;     // SPI 数据输入 (如果需要)       
     /* 
      * IC27 电容触摸传感器节点 
      * 标签名: ic27_touch (这就是你在 overlay 中要引用的名字)
      */
     ic27_touch: touch@27 {
-        compatible = "semtech,sx1280"; /* 注意：请替换为实际的驱动兼容字符串，例如 "onsemi,ncs2200" 或 "zmk,cap-sensor" */
+        compatible = "zmk,cap-sensor"; /* 注意：请替换为实际的驱动兼容字符串，例如 "onsemi,ncs2200" 或 "zmk,cap-sensor" */
         reg = <0x27>;                  /* I2C 地址 0x27 */
         status = "disabled";           /* 默认禁用，由 Shield Overlay 启用 */
         
@@ -50,6 +51,11 @@
     };
 };
 
+&ic27_touch {
+    status = "okay";
+    sda-pin = <4>;    // P0.04
+    scl-pin = <5>;    // P0.05
+};
 /* 
  * SPI 总线配置 (如果你还有 GC9A01A 屏幕，通常也在 SPI 上)
  * 假设屏幕连接在 SPI0
@@ -68,7 +74,7 @@
 */
 
 &adc {
-    status = "disabled";
+    status = "okay";
 };
 
 
@@ -89,11 +95,7 @@
 		;
 };
 
-&ic27_touch {
-    status = "okay";
-    sda-pin = <4>;    // P0.04
-    scl-pin = <5>;    // P0.05
-};
+
 
 // trackball bus
 // &spi0 {

@@ -31,7 +31,6 @@
 &i2c1 {
     status = "okay";
     clock-frequency = <400000>; /* 400kHz */
-    compatible = "zmk,cap-sensor";
     scl-pin = <4>;      // I2C 时钟
     sda-pin = <5>;      // I2C 数据   
     /* 

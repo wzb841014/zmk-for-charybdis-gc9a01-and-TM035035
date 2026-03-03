@@ -4,7 +4,11 @@
  * SPDX-License-Identifier: MIT
  */
 #include "charybdis_right.dtsi"
-
+/ {
+    chosen {
+        zephyr,display = &gc9a01;
+    };
+};     
 
 
 

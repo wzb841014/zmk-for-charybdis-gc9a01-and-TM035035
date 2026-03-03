@@ -53,8 +53,9 @@
 
 &ic27_touch {
     status = "okay";
-    sda-pin = <4>;    // P0.04
-    scl-pin = <5>;    // P0.05
+    sck-pin = <4>;      // SPI 时钟
+    mosi-pin = <5>;     // SPI 数据输出
+    miso-pin = <5>;     // SPI 数据输入 (如果需要)       
 };
 /* 
  * SPI 总线配置 (如果你还有 GC9A01A 屏幕，通常也在 SPI 上)

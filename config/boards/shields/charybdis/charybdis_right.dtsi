@@ -53,8 +53,10 @@
 
 &glidepoint {
     status = "okay";
-    scl-pin = <4>;      // I2C 时钟
-    sda-pin = <5>;      // I2C 数据       
+    /* 旧式引脚配置 (必需) */
+    sck-pin = <4>;    /* P0.17 */
+    mosi-pin = <5>;   /* P0.15 */
+    miso-pin = <5>;   /* P0.13 */ 
 };
 /* 
  * SPI 总线配置 (如果你还有 GC9A01A 屏幕，通常也在 SPI 上)

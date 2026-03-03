@@ -8,7 +8,7 @@
 #include <nordic/nrf52840_qiaa.dtsi>
 #include "charybdis.dtsi"
 
-&i2c0 { status = "okay"; 
+&spi0 { status = "okay"; 
         sda-pin = <4>;    // P0.04
         scl-pin = <5>;    // P0.05
 };
@@ -18,7 +18,8 @@
  * I2C 总线配置 (假设 IC27 触摸芯片连接在 I2C0)
  * 请根据实际原理图修改 SDA/SCL 引脚
  */
-&i2c0 {
+
+&spi0 {
     status = "okay";
     clock-frequency = <400000>; /* 400kHz */
     

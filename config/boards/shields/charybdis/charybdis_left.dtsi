@@ -27,8 +27,8 @@
         compatible = "zmk,gc9a01a";
         label = "GC9A01";
         spi-dev = <&spi0>;
-        reset-gpios = <&gpio0 22 (GPIO_ACTIVE_LOW)>;
-        dc-gpios = <&gpio0 23 (GPIO_ACTIVE_HIGH)>;
+        reset-gpios = <&gpio0 10 (GPIO_ACTIVE_LOW)>;
+        dc-gpios = <&gpio1 11 (GPIO_ACTIVE_HIGH)>;
         cs-gpios = <&gpio0 20 (GPIO_ACTIVE_LOW)>;
         width = <240>;
         height = <240>;

@@ -42,9 +42,9 @@
     status = "okay";
     
     /* 旧式引脚配置 (必需) */
-    sck-pin = <8>;    /* P0.17 */
-    mosi-pin = <17>;   /* P0.15 */
-    miso-pin = <17>;   /* P0.13 */
+    sck-pin = <8>;    
+    mosi-pin = <17>;   
+    miso-pin = <17>;   
     
     /* pinctrl 配置 (可选，如果支持) */
     /* pinctrl-0 = <&spi0_default>; */

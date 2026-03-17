@@ -12,13 +12,13 @@
     /* SPI 引脚配置 */
     spi0_default: spi0_default {
         sck {
-            nrf-pinctrl-single = <17>;
+            nrf-pinctrl-single = <8>;
         };
         mosi {
-            nrf-pinctrl-single = <15>;
+            nrf-pinctrl-single = <17>;
         };
         miso {
-            nrf-pinctrl-single = <13>;
+            nrf-pinctrl-single = <17>;
         };
     };
 
@@ -42,9 +42,9 @@
     status = "okay";
     
     /* 旧式引脚配置 (必需) */
-    sck-pin = <17>;    /* P0.17 */
-    mosi-pin = <15>;   /* P0.15 */
-    miso-pin = <13>;   /* P0.13 */
+    sck-pin = <8>;    /* P0.17 */
+    mosi-pin = <17>;   /* P0.15 */
+    miso-pin = <17>;   /* P0.13 */
     
     /* pinctrl 配置 (可选，如果支持) */
     /* pinctrl-0 = <&spi0_default>; */

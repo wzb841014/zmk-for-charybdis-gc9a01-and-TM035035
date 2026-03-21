@@ -1,6 +1,7 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/led/led.h>
-#include <physical_layouts.dtsi>          // ← 加这行
+#include <zephyr/dt-bindings/zmk/physical_layouts.dtsi>
+
 
 
 

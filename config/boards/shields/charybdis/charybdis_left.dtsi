@@ -30,6 +30,7 @@
         reset-gpios = <&gpio0 10 (GPIO_ACTIVE_LOW)>;
         dc-gpios = <&gpio1 11 (GPIO_ACTIVE_HIGH)>;
         cs-gpios = <&gpio0 20 (GPIO_ACTIVE_LOW)>;
+        bl-gpios = <&gpio1 2  (GPIO_ACTIVE_HIGH)>;  // ← 加这行，改成你实际的引脚
         width = <240>;
         height = <240>;
         rotation = <0>;

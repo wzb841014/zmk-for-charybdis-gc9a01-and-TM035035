@@ -54,3 +54,7 @@
     /* pinctrl-0 = <&spi0_default>; */
     /* pinctrl-names = "default"; */
 };
+
+&adc {
+    status = "okay";
+};

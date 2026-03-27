@@ -8,4 +8,14 @@
 #include <nordic/nrf52840_qiaa.dtsi>
 #include "charybdis.dtsi"
 
+#include <zephyr/drivers/regulator.h>
+
+const struct device *reg = DEVICE_DT_GET(DT_NODELABEL(npm1100_buck));
+
+/* 设置电压为 3.6V */
+regulator_set_voltage(reg, 3600000, 3600000);
+
+/* 启用/禁用 */
+regulator_enable(reg);
+regulator_disable(reg);
 

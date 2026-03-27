@@ -62,7 +62,7 @@
     gc9a01: gc9a01@0 {
         compatible = "zmk,gc9a01a";
 
-        reg = <0>;                    /* ← 添加这行 */
+        reg = <0 0>;                    /* ← 添加这行 */
         spi-dev = <&spi0>;
         reset-gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
         dc-gpios = <&gpio1 11 GPIO_ACTIVE_HIGH>;

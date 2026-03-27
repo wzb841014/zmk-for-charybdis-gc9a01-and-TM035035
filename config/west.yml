@@ -2,18 +2,15 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-   - name: gc9a01a_zephyr_driver
-      url: https://github.com/wzb841014/gc9a01a_zephyr_driver
-
-
-
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
   projects:
-   - name: zmk
+    - name: zmk
       remote: zmkfirmware
-      revision: v0.3
+      revision: feature-test
       import: app/west.yml
- 
-   - name: gc9a01a_zephyr_driver
+    - name: gc9a01a_zephyr_driver
+      url: https://github.com/wzb841014/gc9a01a_zephyr_driver
       revision: main
   self:
     path: .

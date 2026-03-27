@@ -8,13 +8,3 @@
 #include <nordic/nrf52840_qiaa.dtsi>
 #include "charybdis.dtsi"
 
-/ {
-    vcc_display: vcc_display {
-        compatible = "regulator-fixed";
-        label = "VCC_DISPLAY";           /* ← 加上这行 */
-        regulator-name = "vcc-display";
-        enable-gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;  /* X 换成你接的实际引脚号 */
-        regulator-boot-on;
-    };
-};
-

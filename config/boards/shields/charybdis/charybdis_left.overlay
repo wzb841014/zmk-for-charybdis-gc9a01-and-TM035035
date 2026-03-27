@@ -6,11 +6,7 @@
 
 #include "charybdis_left.dtsi"
 #include "charybdis.dtsi"
-/ {
-    chosen {
-        zephyr,display = &gc9a01;
-    };
-};                                                 
+                                       
    
 
 // {

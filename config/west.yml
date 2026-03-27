@@ -7,7 +7,7 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: v3.0
+      revision: v0.3
       import: app/west.yml
     - name: gc9a01a_zephyr_driver
       url: https://github.com/wzb841014/gc9a01a_zephyr_driver

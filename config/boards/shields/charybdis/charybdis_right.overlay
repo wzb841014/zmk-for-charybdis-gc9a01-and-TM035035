@@ -11,6 +11,8 @@
     };
 };       
 
+
+
 / {
     /* SPI 引脚配置 */
     spi0_default: spi0_default {

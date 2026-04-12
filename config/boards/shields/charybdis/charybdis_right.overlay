@@ -1,99 +1,102 @@
 /*
- * Copyright (c) 2020 ZMK Contributors
+ * ST7789 显示屏驱动配置文件
+ * 格式参考：gc9a01a 驱动，适用于 ZMK 固件
  *
- * SPDX-License-Identifier: MIT
+ * 引脚说明（按需修改）：
+ *   SCK   → gpio0 pin 8
+ *   MOSI  → gpio0 pin 17
+ *   MISO  → gpio0 pin 17  (通常 ST7789 只需 MOSI，MISO 可与 MOSI 同脚或悬空)
+ *   RST   → gpio0 pin 10
+ *   DC    → gpio1 pin 11
+ *   CS    → gpio0 pin 20
+ *   BL    → gpio1 pin 2
+ *
+ * ST7789 常见分辨率：
+ *   240x240 (方屏)  x-offset=0  y-offset=0
+ *   240x320 (竖屏)  x-offset=0  y-offset=0
+ *   170x320 (T-Display-S3 等)  x-offset=35 y-offset=0
+ *   240x135 (T-Display 等)     x-offset=40 y-offset=53
  */
-#include "charybdis_right.dtsi"
+
 #include "charybdis.dtsi"
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
 / {
-    chosen {
-        zephyr,display = &gc9a01;
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        label = "KSCAN";
+        row-gpios = <&pro_micro 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 };
 
-&default_transform {
-    col-offset = <6>;
-};
-
-&kscan0 {
-    col-gpios
-        = <&gpio0 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&gpio0 29 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&gpio1 0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&gpio0 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&gpio1 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        ;
-};
-
-/* pinctrl 配置 - 必须放在 &pinctrl 节点下 */
-&pinctrl {
+/ {
+    /* -------------------------------------------------------
+     * SPI 引脚 pinctrl 配置（可选，nRF52840 支持 pinctrl）
+     * ------------------------------------------------------- */
     spi0_default: spi0_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 17)>;
+        sck {
+            nrf-pinctrl-single = <8>;
         };
-        group2 {
-            psels = <NRF_PSEL(SPIM_MISO, 0, 17)>;
-            bias-pull-up;
+        mosi {
+            nrf-pinctrl-single = <17>;
+        };
+        miso {
+            nrf-pinctrl-single = <17>;
         };
     };
 
-    spi0_sleep: spi0_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 17)>,
-                    <NRF_PSEL(SPIM_MISO, 0, 17)>;
-            low-power-enable;
-        };
+    /* -------------------------------------------------------
+     * ST7789 显示屏节点定义
+     *
+     * compatible 字段需要 ZMK 源码中存在对应驱动：
+     *   zmk,st7789v  ← 推荐，ZMK 官方/社区驱动标识
+     *
+     * 若你的 ZMK 版本使用不同标识，可替换为：
+     *   "sitronix,st7789v"  (Zephyr 上游标识)
+     * ------------------------------------------------------- */
+    st7789: st7789 {
+        compatible = "zmk,st7789v";
+        label = "ST7789";
+
+        /* SPI 总线绑定 */
+        spi-dev = <&spi0>;
+
+        /* 控制引脚（根据实际接线修改） */
+        reset-gpios = <&gpio0 10 (GPIO_ACTIVE_LOW)>;   /* RST，低电平复位 */
+        dc-gpios    = <&gpio1 11 (GPIO_ACTIVE_HIGH)>;  /* D/C，高=数据 低=命令 */
+        cs-gpios    = <&gpio0 20 (GPIO_ACTIVE_LOW)>;   /* CS，低电平选中 */
+        bl-gpios    = <&gpio1  2 (GPIO_ACTIVE_HIGH)>;  /* 背光，高电平点亮；如无背光可删除 */
+
+        /* 屏幕参数 —— 根据你的模组型号选择 */
+        width    = <240>;  /* 像素宽度 */
+        height   = <240>;  /* 像素高度 */
+        rotation = <0>;    /* 旋转角度：0 / 90 / 180 / 270 */
+        x-offset = <0>;    /* 列偏移（240x240 方屏填 0） */
+        y-offset = <0>;    /* 行偏移（240x240 方屏填 0） */
+
+        /*
+         * 常见偏移量参考（ST7789 内部 RAM 为 240x320，小尺寸屏需偏移）：
+         *   240x240  →  x-offset=0,  y-offset=0
+         *   240x135  →  x-offset=40, y-offset=53
+         *   170x320  →  x-offset=35, y-offset=0
+         *   135x240  →  x-offset=52, y-offset=40  (横屏 240x135)
+         */
     };
 };
 
+/* -------------------------------------------------------
+ * SPI 总线配置
+ * ------------------------------------------------------- */
 &spi0 {
     status = "okay";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-1 = <&spi0_sleep>;
-    pinctrl-names = "default", "sleep";
-    /* 删除旧式引脚配置 */
-};
 
-/ {
-    gc9a01: gc9a01 {
-        compatible = "zmk,gc9a01a";
+    /* 旧式引脚配置（nRF5 SDK 兼容方式，大多数 ZMK 配置使用此项） */
+    sck-pin  = <8>;    /* SCK  引脚编号（nRF52840 绝对引脚号） */
+    mosi-pin = <17>;   /* MOSI 引脚编号 */
+    miso-pin = <17>;   /* MISO 引脚编号（ST7789 只写屏，可与 MOSI 同脚或设为悬空脚） */
 
-    
-        spi-dev = <&spi0>;
-        reset-gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
-        dc-gpios = <&gpio1 11 GPIO_ACTIVE_HIGH>;
-        cs-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
-        bl-gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
-        width = <240>;
-        height = <240>;
-        rotation = <0>;
-        x-offset = <0>;
-        y-offset = <0>;
-    };
-};
-
-&gpio0 {
-    status = "okay";
-};
-
-&gpio1 {
-    status = "okay";
-};
-
-&adc {
-    status = "okay";
-};
-
-/ {
-    vbatt: vbatt {
-        compatible = "zmk,battery-voltage-divider";
-        label = "VBATT";
-        io-channels = <&adc 2>;
-        output-ohms = <100000>;
-        full-ohms = <(100000 + 100000)>;
-    };
+    /* pinctrl 配置（如果 ZMK 版本支持，可取消注释） */
+    /* pinctrl-0 = <&spi0_default>; */
+    /* pinctrl-names = "default"; */
 };

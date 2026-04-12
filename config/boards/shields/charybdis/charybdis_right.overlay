@@ -2,6 +2,8 @@
  * ST7789 显示屏驱动配置文件
  * 格式参考：gc9a01a 驱动，适用于 ZMK 固件
  *
+ * 适用于 Zephyr pinctrl 方式配置的 ZMK 版本
+ *
  * 引脚说明（按需修改）：
  *   SCK   → gpio0 pin 8
  *   MOSI  → gpio0 pin 17
@@ -32,17 +34,18 @@
 
 / {
     /* -------------------------------------------------------
-     * SPI 引脚 pinctrl 配置（可选，nRF52840 支持 pinctrl）
+     * SPI pinctrl 配置（Zephyr 统一引脚管理方式）
+     *
+     * 格式说明：
+     *   <PSEL|pin_num  & 0xFF>  即 <引脚号>
+     *   ST7789 只写屏，MISO 通常设为 NOT_CONNECTED
+     *   如果不想用硬件 CS（显示屏用软件 CS），可在 spim 中不定义 cs-pin
      * ------------------------------------------------------- */
     spi0_default: spi0_default {
-        sck {
-            nrf-pinctrl-single = <8>;
-        };
-        mosi {
-            nrf-pinctrl-single = <17>;
-        };
-        miso {
-            nrf-pinctrl-single = <17>;
+        group0 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 17)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 17)>;
         };
     };
 
@@ -86,17 +89,19 @@
 };
 
 /* -------------------------------------------------------
- * SPI 总线配置
+ * SPI 总线配置 —— 使用 pinctrl 方式（新版 Zephyr 必须）
  * ------------------------------------------------------- */
 &spi0 {
     status = "okay";
 
-    /* 旧式引脚配置（nRF5 SDK 兼容方式，大多数 ZMK 配置使用此项） */
-    sck-pin  = <8>;    /* SCK  引脚编号（nRF52840 绝对引脚号） */
-    mosi-pin = <17>;   /* MOSI 引脚编号 */
-    miso-pin = <17>;   /* MISO 引脚编号（ST7789 只写屏，可与 MOSI 同脚或设为悬空脚） */
+    /* 引脚必须通过 pinctrl-0 配置，不再支持 sck-pin/mosi-pin 写法 */
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-names = "default";
 
-    /* pinctrl 配置（如果 ZMK 版本支持，可取消注释） */
-    /* pinctrl-0 = <&spi0_default>; */
-    /* pinctrl-names = "default"; */
+    /*
+     * 注意：cs-pin 不在此处定义
+     * 显示屏的 CS 由屏幕节点通过 cs-gpios 单独控制
+     * 如果 spi0 本身需要片选（如接其他 SPI 设备），可加：
+     *   cs-gpios = <&gpioX Y GPIO_ACTIVE_LOW>;
+     */
 };
